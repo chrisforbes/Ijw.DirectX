@@ -24,5 +24,6 @@ namespace Ijw { namespace DirectX
 	{
 		PointList = D3DPT_POINTLIST,
 		TriangleList = D3DPT_TRIANGLELIST,
+		LineList = D3DPT_LINELIST,
 	};
 }}
