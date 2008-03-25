@@ -42,7 +42,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="C:\Users\Chris\Desktop\Code\svn\dxsdk\Include"
+				AdditionalIncludeDirectories="..\..\dxsdk\Include"
 				PreprocessorDefinitions="WIN32;_DEBUG"
 				RuntimeLibrary="3"
 				UsePrecompiledHeader="0"
@@ -62,7 +62,7 @@
 				Name="VCLinkerTool"
 				AdditionalDependencies="$(NoInherit)"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories="C:\Users\Chris\Desktop\Code\svn\dxsdk\Lib\x86"
+				AdditionalLibraryDirectories="..\..\dxsdk\Lib\x86"
 				GenerateDebugInformation="true"
 				AssemblyDebug="1"
 				RandomizedBaseAddress="1"
@@ -118,7 +118,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="C:\Users\Chris\Desktop\Code\svn\dxsdk\Include"
+				AdditionalIncludeDirectories="..\..\dxsdk\Include"
 				PreprocessorDefinitions="WIN32;NDEBUG"
 				RuntimeLibrary="2"
 				UsePrecompiledHeader="0"
@@ -138,7 +138,7 @@
 				Name="VCLinkerTool"
 				AdditionalDependencies="$(NoInherit)"
 				LinkIncremental="1"
-				AdditionalLibraryDirectories="C:\Users\Chris\Desktop\Code\svn\dxsdk\Lib\x86"
+				AdditionalLibraryDirectories="..\..\dxsdk\Lib\x86"
 				GenerateDebugInformation="true"
 				RandomizedBaseAddress="1"
 				DataExecutionPrevention="0"
