@@ -56,6 +56,29 @@ namespace Ijw { namespace DirectX
 		unsigned int fvf;
 
 	public:
+		ref class Lock
+		{
+			void* lock;
+			FvfVertexBuffer^ buffer;
+
+		public:
+			Lock( FvfVertexBuffer^ buffer )
+				: buffer(buffer)
+			{
+				void* lock;
+				buffer->buffer->Lock( 0, sizeof(T) * buffer->numVertices, &lock, D3DLOCK_NOOVERWRITE );
+				this->lock = lock;
+			}
+
+			~Lock()
+			{
+				buffer->buffer->Unlock();
+			}
+
+			property void* Pointer { void* get() { return lock; } }
+		};
+
+	public:
 		FvfVertexBuffer( GraphicsDevice^ device, int numVertices, VertexFormat fvf ) 
 			: numVertices( numVertices ), device(device->device), fvf((unsigned int)fvf)
 		{
@@ -63,10 +86,17 @@ namespace Ijw { namespace DirectX
 			IDirect3DVertexBuffer9* b;
 
 			if (FAILED( hr = device->device->CreateVertexBuffer( sizeof(T) * numVertices, 
-				device->HasHardwareVP ? 0 : D3DUSAGE_SOFTWAREPROCESSING, this->fvf, D3DPOOL_SYSTEMMEM, &b, NULL )))
+				device->HasHardwareVP ? 0 : D3DUSAGE_SOFTWAREPROCESSING, 
+				this->fvf, 
+				device->HasHardwareVP ? D3DPOOL_DEFAULT : D3DPOOL_SYSTEMMEM, &b, NULL )))
 				ThrowHelper::Hr(hr);
 
 			buffer = b;
+		}
+
+		Lock^ LockBuffer()
+		{
+			return gcnew Lock( this );
 		}
 
 		void SetData( array<T>^ data )
