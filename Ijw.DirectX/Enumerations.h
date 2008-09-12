@@ -8,6 +8,7 @@ namespace Ijw { namespace DirectX
 		None = 0,
 		Color = D3DCLEAR_TARGET,
 		Depth = D3DCLEAR_ZBUFFER,
+		Stencil = D3DCLEAR_STENCIL,
 	};
 
 	[Flags]

@@ -120,10 +120,13 @@ namespace Ijw { namespace DirectX
 			pp.BackBufferFormat = D3DFMT_X8R8G8B8;
 
 			bool needZ = 0 != (int)(surfs & Surfaces::Depth);
+			bool needStencil = 0 != (int)(surfs & Surfaces::Stencil);
 
 			pp.EnableAutoDepthStencil = needZ;
 			if (needZ)
 				pp.AutoDepthStencilFormat = D3DFMT_D24X8;
+			if (needStencil)
+				pp.AutoDepthStencilFormat = D3DFMT_D24S8;	// todo: fallback to S1
 			pp.SwapEffect = D3DSWAPEFFECT_DISCARD;
 			
 			pp.Windowed = windowed;
