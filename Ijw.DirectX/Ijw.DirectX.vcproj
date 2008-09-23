@@ -179,6 +179,11 @@
 			AssemblyName="IjwFramework, Version=1.0.0.0, processorArchitecture=MSIL"
 			MinFrameworkVersion="131072"
 		/>
+		<AssemblyReference
+			RelativePath="..\..\IjwFramework\Ijw.Math\bin\Release\Ijw.Math.dll"
+			AssemblyName="Ijw.Math, Version=0.0.0.0, processorArchitecture=MSIL"
+			MinFrameworkVersion="131072"
+		/>
 	</References>
 	<Files>
 		<Filter

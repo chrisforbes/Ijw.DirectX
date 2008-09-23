@@ -1,7 +1,18 @@
 #pragma once
 
+using namespace Ijw::Math;
+
 namespace Ijw { namespace DirectX
 {
+	public value class TraceResult
+	{
+	public:
+		bool hit;
+		float t;
+		float u;
+		float v;
+		DWORD faceIndex;
+	};
 
 	generic< typename T > where T : value class
 	public ref class Mesh
@@ -56,6 +67,24 @@ namespace Ijw { namespace DirectX
 		void DrawSubset( int attributeId )
 		{
 			mesh->DrawSubset( attributeId );
+		}
+
+		TraceResult Intersect( Ijw::Math::Vector3 rayStart, Ijw::Math::Vector3 rayDir)
+		{
+			TraceResult tr;
+			ID3DXBuffer * crap = 0;
+			DWORD amountOfCrap;
+			BOOL hit;
+
+			if (FAILED(D3DXIntersect( mesh, (D3DXVECTOR3 const *) &rayStart, (D3DXVECTOR3 const *) &rayDir,
+				&hit, &tr.faceIndex, &tr.u, &tr.v, &tr.t, &crap, &amountOfCrap )))
+				tr.hit = false;
+			else
+				tr.hit = (bool)hit;
+
+			safe_release( crap )
+
+			return tr;
 		}
 
 		~Mesh()
