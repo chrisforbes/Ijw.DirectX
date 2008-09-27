@@ -41,7 +41,7 @@ namespace Ijw { namespace DirectX
 
 			return gcnew Texture( tex );
 		}
-		
+
 		static Texture^ CreateCube( Stream^ stream, GraphicsDevice^ device )
 		{
 			stream->Position = 0;
@@ -53,10 +53,18 @@ namespace Ijw { namespace DirectX
 
 			pin_ptr<unsigned char> p = &data[0];
 
-			if (FAILED( hr = D3DXCreateCubeTextureFromFileInMemory( device->device, p, data->Length, (IDirect3DCubeTexture9**)&tex ) ))
+			if (FAILED(hr = D3DXCreateCubeTextureFromFileInMemory( device->device, p, data->Length,
+				(IDirect3DCubeTexture9**)&tex )))
 				throw gcnew InvalidOperationException("Texture load failed");
 
+			tex->GenerateMipSubLevels();
+
 			return gcnew Texture( tex );
+		}
+
+		void SetLod( int n )
+		{
+			texture->SetLOD(n);
 		}
 
 		static Texture^ CreateRenderTarget( GraphicsDevice^ device, int width, int height )
