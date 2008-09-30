@@ -131,7 +131,7 @@ namespace Ijw { namespace DirectX
 		void SetValue( String^ name, Texture^ texture )
 		{
 			IntPtr handle = parameters[name];
-			effect->SetTexture( (D3DXHANDLE)handle.ToPointer(), texture->texture );
+			effect->SetTexture( (D3DXHANDLE)handle.ToPointer(), texture ? texture->texture : nullptr );
 		}
 
 		property array<KeyValuePair<IntPtr, String^>>^ ShaderResources
