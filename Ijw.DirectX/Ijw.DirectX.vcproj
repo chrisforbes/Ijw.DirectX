@@ -42,7 +42,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..\..\dxsdk\Include"
+				AdditionalIncludeDirectories="..\dxsdk\Include"
 				PreprocessorDefinitions="WIN32;_DEBUG"
 				RuntimeLibrary="3"
 				UsePrecompiledHeader="0"
@@ -62,7 +62,7 @@
 				Name="VCLinkerTool"
 				AdditionalDependencies="$(NoInherit)"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories="..\..\dxsdk\Lib\x86"
+				AdditionalLibraryDirectories="..\dxsdk\Lib\x86"
 				GenerateDebugInformation="true"
 				AssemblyDebug="1"
 				RandomizedBaseAddress="1"
@@ -118,7 +118,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="..\..\dxsdk\Include"
+				AdditionalIncludeDirectories="..\dxsdk\Include"
 				PreprocessorDefinitions="WIN32;NDEBUG"
 				RuntimeLibrary="2"
 				UsePrecompiledHeader="0"
@@ -138,7 +138,7 @@
 				Name="VCLinkerTool"
 				AdditionalDependencies="$(NoInherit)"
 				LinkIncremental="1"
-				AdditionalLibraryDirectories="..\..\dxsdk\Lib\x86"
+				AdditionalLibraryDirectories="..\dxsdk\Lib\x86"
 				GenerateDebugInformation="true"
 				RandomizedBaseAddress="1"
 				DataExecutionPrevention="0"
@@ -175,12 +175,12 @@
 			MinFrameworkVersion="131072"
 		/>
 		<AssemblyReference
-			RelativePath="..\..\IjwFramework\IjwFramework\bin\Debug\IjwFramework.dll"
+			RelativePath="..\ijw.framework\ijwframework\bin\debug\ijwframework.dll"
 			AssemblyName="IjwFramework, Version=1.0.0.0, processorArchitecture=MSIL"
 			MinFrameworkVersion="131072"
 		/>
 		<AssemblyReference
-			RelativePath="..\..\IjwFramework\Ijw.Math\bin\Release\Ijw.Math.dll"
+			RelativePath="..\ijw.framework\ijw.math\bin\release\ijw.math.dll"
 			AssemblyName="Ijw.Math, Version=0.0.0.0, processorArchitecture=MSIL"
 			MinFrameworkVersion="131072"
 		/>
