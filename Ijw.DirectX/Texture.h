@@ -25,23 +25,16 @@ namespace Ijw { namespace DirectX
 			return IntPtr(surf);
 		}
 
-		static Texture^ CreateFromBitmap( System::Drawing::Bitmap^ b, GraphicsDevice^ device )
+		void SetData( System::Drawing::Bitmap^ b )
 		{
+			HRESULT hr;
 			System::Drawing::Imaging::BitmapData^ bits = b->LockBits(
 				System::Drawing::Rectangle( 0, 0, b->Width, b->Height ),
 				System::Drawing::Imaging::ImageLockMode::ReadOnly,
 				System::Drawing::Imaging::PixelFormat::Format32bppArgb);
 
-			HRESULT hr;
-			IDirect3DTexture9* tex;
-
-			if (FAILED( hr = device->device->CreateTexture( bits->Width, bits->Height, 
-				1, 0 /*usage*/, D3DFMT_A8R8G8B8,
-				D3DPOOL_MANAGED, &tex, 0 )))
-				throw gcnew InvalidOperationException( "Texture create failed" );
-
 			D3DLOCKED_RECT lr;
-			if (FAILED( hr = tex->LockRect( 0, &lr, 0, D3DLOCK_DISCARD )))
+			if (FAILED( hr = ((IDirect3DTexture9*)texture)->LockRect( 0, &lr, 0, D3DLOCK_DISCARD )))
 				throw gcnew InvalidOperationException( "Lock failed" );
 
 			unsigned char const * p = (unsigned char const *)bits->Scan0.ToPointer();
@@ -50,11 +43,25 @@ namespace Ijw { namespace DirectX
 			for( int i = 0; i < bits->Height; i++ )
 				memcpy( q + lr.Pitch * i, p + bits->Stride * i, 4 * bits->Width );
 
-			if (FAILED( hr = tex->UnlockRect( 0 ) ))
+			if (FAILED( hr = ((IDirect3DTexture9*)texture)->UnlockRect( 0 ) ))
 				throw gcnew InvalidOperationException( "Unlock failed" );
 
 			b->UnlockBits( bits );
-			return gcnew Texture( tex );
+		}
+
+		static Texture^ CreateFromBitmap( System::Drawing::Bitmap^ b, GraphicsDevice^ device )
+		{
+			HRESULT hr;
+			IDirect3DTexture9* tex;
+
+			if (FAILED( hr = device->device->CreateTexture( b->Width, b->Height, 
+				1, 0 /*usage*/, D3DFMT_A8R8G8B8,
+				D3DPOOL_MANAGED, &tex, 0 )))
+				throw gcnew InvalidOperationException( "Texture create failed" );
+
+			Texture^ result = gcnew Texture( tex );
+			result->SetData( b );
+			return result;
 		}
 
 		static Texture^ Create( Stream^ stream, GraphicsDevice^ device )
